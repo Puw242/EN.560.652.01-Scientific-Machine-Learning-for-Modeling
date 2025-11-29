@@ -1,0 +1,8 @@
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/kitti/Dataset_Prepare$ python /home/frank/Pu/sci_ML/Tools/Sci_ML_kitti_val.py
+[Dataset] Loaded 60 samples from /home/frank/Pu/sci_ML/kitti/Dataset_Prepare/selected_cases_60
+[Split] Train: 48, Val: 12
+[Info] Loaded model weights from: /home/frank/Pu/sci_ML/Tools/case_mlp_3way.pth
+========= EVALUATION =========
+[Train split] Loss: 2.2829 | Overall Acc: 0.7153
+[Val split] Loss: 2.7538 | Overall Acc: 0.4167
+[Full dataset] Loss: 2.3392 | Overall Acc: 0.6556

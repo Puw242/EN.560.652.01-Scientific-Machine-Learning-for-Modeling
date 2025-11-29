@@ -1,0 +1,272 @@
+
+# 改进的第一个版本，用精简数据集 （去掉假阳性之后的结果） （曲线1）
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/Tools$ python /home/frank/Pu/sci_ML/Tools/Sci_ML_kitti_train.py
+[Dataset] Loaded 60 samples from /home/frank/Pu/sci_ML/kitti/Dataset_Prepare/selected_cases_60
+[Split] Train: 48, Val: 12
+[Epoch 01] Train Loss: 3.2227 | Val Loss: 3.2114 | Val Acc: 0.3611
+[Epoch 02] Train Loss: 3.1217 | Val Loss: 3.1407 | Val Acc: 0.4444
+[Epoch 03] Train Loss: 3.0252 | Val Loss: 3.0810 | Val Acc: 0.5833
+[Epoch 04] Train Loss: 2.9280 | Val Loss: 3.0314 | Val Acc: 0.5556
+[Epoch 05] Train Loss: 2.8329 | Val Loss: 2.9838 | Val Acc: 0.4167
+[Epoch 06] Train Loss: 2.7332 | Val Loss: 2.9419 | Val Acc: 0.4167
+[Epoch 07] Train Loss: 2.6362 | Val Loss: 2.9085 | Val Acc: 0.4167
+[Epoch 08] Train Loss: 2.5372 | Val Loss: 2.8559 | Val Acc: 0.4167
+[Epoch 09] Train Loss: 2.4421 | Val Loss: 2.8140 | Val Acc: 0.4167
+[Epoch 10] Train Loss: 2.3409 | Val Loss: 2.7538 | Val Acc: 0.4167
+[Epoch 11] Train Loss: 2.2480 | Val Loss: 2.6956 | Val Acc: 0.4167
+[Epoch 12] Train Loss: 2.1572 | Val Loss: 2.6118 | Val Acc: 0.4167
+[Epoch 13] Train Loss: 2.0518 | Val Loss: 2.4594 | Val Acc: 0.5000
+[Epoch 14] Train Loss: 1.9260 | Val Loss: 2.3601 | Val Acc: 0.5000
+[Epoch 15] Train Loss: 1.8049 | Val Loss: 2.2651 | Val Acc: 0.5000
+[Epoch 16] Train Loss: 1.6712 | Val Loss: 2.1478 | Val Acc: 0.5000
+[Epoch 17] Train Loss: 1.5477 | Val Loss: 2.0240 | Val Acc: 0.5278
+[Epoch 18] Train Loss: 1.4147 | Val Loss: 1.9720 | Val Acc: 0.5556
+[Epoch 19] Train Loss: 1.2958 | Val Loss: 1.9405 | Val Acc: 0.5833
+[Epoch 20] Train Loss: 1.1888 | Val Loss: 1.9440 | Val Acc: 0.6111
+[Epoch 21] Train Loss: 1.1003 | Val Loss: 1.9926 | Val Acc: 0.6111
+[Epoch 22] Train Loss: 1.0173 | Val Loss: 1.9773 | Val Acc: 0.6389
+[Epoch 23] Train Loss: 0.9506 | Val Loss: 1.9969 | Val Acc: 0.6667
+[Epoch 24] Train Loss: 0.8850 | Val Loss: 1.9789 | Val Acc: 0.6667
+[Epoch 25] Train Loss: 0.8274 | Val Loss: 1.9744 | Val Acc: 0.6667
+[Epoch 26] Train Loss: 0.7845 | Val Loss: 1.9583 | Val Acc: 0.6667
+[Epoch 27] Train Loss: 0.7370 | Val Loss: 1.9230 | Val Acc: 0.6944
+[Epoch 28] Train Loss: 0.6906 | Val Loss: 1.8616 | Val Acc: 0.6944
+[Epoch 29] Train Loss: 0.6604 | Val Loss: 1.8841 | Val Acc: 0.6944
+[Epoch 30] Train Loss: 0.6248 | Val Loss: 1.7871 | Val Acc: 0.6944
+[Done] Model saved to: /home/frank/Pu/sci_ML/Tools/case_mlp_3way.pth
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/Tools$ 
+
+
+# method ok curvey （曲线2） 这个曲线论证了我们的方法可以实现这样的设计。
+
+after summary result:
+
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/Tools$ python /home/frank/Pu/sci_ML/Tools/Sci_ML_kitti_train_V2_PIBO.py
+[Dataset] Loaded 60 samples from /home/frank/Pu/sci_ML/kitti/Dataset_Prepare/selected_cases_60
+[Split] Train: 48, Val: 12
+
+========== Stage 0: PIBO (Physical-Information-Based Initialization) ==========
+Epoch |  Train L_phys  |  Val CE (proxy)  |  Val Acc (proxy)
+---------------------------------------------------------------
+    1 |        1.0419 |          3.2709 |      0.1944
+    2 |        0.9883 |          3.2475 |      0.3889
+    3 |        0.9553 |          3.2308 |      0.4167
+    4 |        0.8977 |          3.2160 |      0.4167
+    5 |        0.8508 |          3.2094 |      0.3889
+
+====================== Stage 1: Supervised Training ======================
+Epoch |  Train CE (±Phys) |   Val CE       |  Val Acc
+------------------------------------------------------
+    1 |           3.1642 |       3.1651 |    0.4167
+    2 |           3.0960 |       3.1007 |    0.4444
+    3 |           3.0078 |       3.0158 |    0.4722
+    4 |           2.8952 |       2.9396 |    0.4722
+    5 |           2.7850 |       2.8568 |    0.5833
+    6 |           2.6682 |       2.7784 |    0.5833
+    7 |           2.5525 |       2.6950 |    0.5278
+    8 |           2.4217 |       2.5983 |    0.5278
+    9 |           2.3014 |       2.5390 |    0.5000
+   10 |           2.1848 |       2.4841 |    0.5000
+   11 |           2.0610 |       2.4078 |    0.5000
+   12 |           1.9418 |       2.2858 |    0.5000
+   13 |           1.8152 |       2.1837 |    0.5000
+   14 |           1.6830 |       2.0721 |    0.5278
+   15 |           1.5478 |       1.9736 |    0.5556
+   16 |           1.4137 |       1.9208 |    0.5556
+   17 |           1.2692 |       1.8266 |    0.6111
+   18 |           1.1489 |       1.8022 |    0.6111
+   19 |           1.0314 |       1.8061 |    0.6389
+   20 |           0.9321 |       1.8422 |    0.6389
+   21 |           0.8576 |       1.8673 |    0.6667
+   22 |           0.7878 |       1.8788 |    0.6667
+   23 |           0.7261 |       1.8461 |    0.6944
+   24 |           0.6848 |       1.9040 |    0.6944
+   25 |           0.6414 |       1.8104 |    0.6944
+   26 |           0.6021 |       1.7438 |    0.6944
+   27 |           0.5725 |       1.7522 |    0.6944
+   28 |           0.5414 |       1.6946 |    0.6944
+   29 |           0.5157 |       1.6270 |    0.7222
+   30 |           0.4958 |       1.5669 |    0.7222
+
+[Done] PIBO Model saved to: /home/frank/Pu/sci_ML/Tools/case_mlp_3way_pibo.pth
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/Tools$ 
+
+# Final curvey （曲线3）
+
+# 50 the accuracy have a great increae.
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/Tools$ python /home/frank/Pu/sci_ML/Tools/Sci_ML_kitti_train_V2_PIBO.py
+[Dataset] Loaded 60 samples from /home/frank/Pu/sci_ML/kitti/Dataset_Prepare/selected_cases_60
+[Split] Train: 48, Val: 12
+
+========== Stage 0: PIBO (Physical-Information-Based Initialization) ==========
+Epoch |  Train L_phys  |  Val CE (proxy)  |  Val Acc (proxy)
+---------------------------------------------------------------
+    1 |        1.0419 |          3.2709 |      0.1944
+    2 |        0.9883 |          3.2475 |      0.3889
+    3 |        0.9553 |          3.2308 |      0.4167
+    4 |        0.8977 |          3.2160 |      0.4167
+    5 |        0.8508 |          3.2094 |      0.3889
+
+====================== Stage 1: Supervised Training ======================
+Epoch |  Train CE (±Phys) |   Val CE       |  Val Acc
+------------------------------------------------------
+    1 |           3.1642 |       3.1651 |    0.4167
+    2 |           3.0960 |       3.1007 |    0.4444
+    3 |           3.0078 |       3.0158 |    0.4722
+    4 |           2.8952 |       2.9396 |    0.4722
+    5 |           2.7850 |       2.8568 |    0.5833
+    6 |           2.6682 |       2.7784 |    0.5833
+    7 |           2.5525 |       2.6950 |    0.5278
+    8 |           2.4217 |       2.5983 |    0.5278
+    9 |           2.3014 |       2.5390 |    0.5000
+   10 |           2.1848 |       2.4841 |    0.5000
+   11 |           2.0610 |       2.4078 |    0.5000
+   12 |           1.9418 |       2.2858 |    0.5000
+   13 |           1.8152 |       2.1837 |    0.5000
+   14 |           1.6830 |       2.0721 |    0.5278
+   15 |           1.5478 |       1.9736 |    0.5556
+   16 |           1.4137 |       1.9208 |    0.5556
+   17 |           1.2692 |       1.8266 |    0.6111
+   18 |           1.1489 |       1.8022 |    0.6111
+   19 |           1.0314 |       1.8061 |    0.6389
+   20 |           0.9321 |       1.8422 |    0.6389
+   21 |           0.8576 |       1.8673 |    0.6667
+   22 |           0.7878 |       1.8788 |    0.6667
+   23 |           0.7261 |       1.8461 |    0.6944
+   24 |           0.6848 |       1.9040 |    0.6944
+   25 |           0.6414 |       1.8104 |    0.6944
+   26 |           0.6021 |       1.7438 |    0.6944
+   27 |           0.5725 |       1.7522 |    0.6944
+   28 |           0.5414 |       1.6946 |    0.6944
+   29 |           0.5157 |       1.6270 |    0.7222
+   30 |           0.4958 |       1.5669 |    0.7222
+   31 |           0.4791 |       1.4863 |    0.7222
+   32 |           0.4606 |       1.4363 |    0.7222
+   33 |           0.4508 |       1.5050 |    0.7222
+   34 |           0.4454 |       1.3284 |    0.7222
+   35 |           0.4214 |       1.3593 |    0.7222
+   36 |           0.3998 |       1.2811 |    0.7222
+   37 |           0.3915 |       1.1790 |    0.7222
+   38 |           0.3827 |       1.2063 |    0.7222
+   39 |           0.3712 |       1.1661 |    0.7500
+   40 |           0.3534 |       1.0470 |    0.8333
+   41 |           0.3602 |       0.9298 |    0.8333
+   42 |           0.3525 |       1.0943 |    0.7778
+   43 |           0.3389 |       1.0904 |    0.7778
+   44 |           0.3198 |       0.9727 |    0.8889
+   45 |           0.3090 |       0.8441 |    0.9444
+   46 |           0.3101 |       0.8472 |    0.9444
+   47 |           0.3021 |       0.9224 |    0.9167
+   48 |           0.2926 |       0.9391 |    0.8611
+   49 |           0.2883 |       0.8293 |    0.9444
+   50 |           0.2846 |       0.8849 |    0.8889
+
+[Done] PIBO Model saved to: /home/frank/Pu/sci_ML/Tools/case_mlp_3way_pibo.pth
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/Tools$  
+
+# final  
+
+
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/Tools$ python /home/frank/Pu/sci_ML/Tools/Sci_ML_kitti_val.py
+[Dataset] Loaded 60 samples from /home/frank/Pu/sci_ML/kitti/Dataset_Prepare/selected_cases_60
+[Split] Train: 48, Val: 12
+[Info] Loaded model weights from: /home/frank/Pu/sci_ML/Tools/case_mlp_3way_pibo_88_94.pth
+========= EVALUATION =========
+[Train split] Loss: 0.2730 | Overall Acc: 0.9653
+[Val split] Loss: 0.8849 | Overall Acc: 0.8889
+[Full dataset] Loss: 0.3718 | Overall Acc: 0.9500
+
+# Ablation study 全数据集的方法 （曲线4）
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/Tools$ python /home/frank/Pu/sci_ML/Tools/Sci_ML_kitti_train_V2.py
+[Dataset] Loaded 60 samples from /home/frank/Pu/sci_ML/kitti/Dataset_Prepare/selected_cases_60_full_v2_all_boxes
+[Split] Train: 48, Val: 12
+[Epoch 01] Train Loss: 3.2250 | Val Loss: 3.2727 | Val Acc: 0.2500
+[Epoch 02] Train Loss: 3.1939 | Val Loss: 3.2657 | Val Acc: 0.2500
+[Epoch 03] Train Loss: 3.1626 | Val Loss: 3.2618 | Val Acc: 0.2500
+[Epoch 04] Train Loss: 3.1356 | Val Loss: 3.2625 | Val Acc: 0.2500
+[Epoch 05] Train Loss: 3.1054 | Val Loss: 3.2641 | Val Acc: 0.4167
+[Epoch 06] Train Loss: 3.0773 | Val Loss: 3.2670 | Val Acc: 0.4167
+[Epoch 07] Train Loss: 3.0458 | Val Loss: 3.2686 | Val Acc: 0.3333
+[Epoch 08] Train Loss: 3.0090 | Val Loss: 3.2682 | Val Acc: 0.3333
+[Epoch 09] Train Loss: 2.9742 | Val Loss: 3.2713 | Val Acc: 0.3333
+[Epoch 10] Train Loss: 2.9325 | Val Loss: 3.2737 | Val Acc: 0.3333
+[Epoch 11] Train Loss: 2.8886 | Val Loss: 3.2752 | Val Acc: 0.3333
+[Epoch 12] Train Loss: 2.8429 | Val Loss: 3.2796 | Val Acc: 0.3333
+[Epoch 13] Train Loss: 2.7829 | Val Loss: 3.2776 | Val Acc: 0.3333
+[Epoch 14] Train Loss: 2.7338 | Val Loss: 3.2908 | Val Acc: 0.3333
+[Epoch 15] Train Loss: 2.6765 | Val Loss: 3.3111 | Val Acc: 0.3333
+[Epoch 16] Train Loss: 2.6199 | Val Loss: 3.3332 | Val Acc: 0.3333
+[Epoch 17] Train Loss: 2.5626 | Val Loss: 3.3544 | Val Acc: 0.3333
+[Epoch 18] Train Loss: 2.5202 | Val Loss: 3.3906 | Val Acc: 0.3333
+[Epoch 19] Train Loss: 2.4825 | Val Loss: 3.4238 | Val Acc: 0.3333
+[Epoch 20] Train Loss: 2.4570 | Val Loss: 3.4694 | Val Acc: 0.3333
+[Epoch 21] Train Loss: 2.4395 | Val Loss: 3.5185 | Val Acc: 0.3333
+[Epoch 22] Train Loss: 2.4213 | Val Loss: 3.5318 | Val Acc: 0.3333
+[Epoch 23] Train Loss: 2.4077 | Val Loss: 3.5248 | Val Acc: 0.3333
+[Epoch 24] Train Loss: 2.3955 | Val Loss: 3.5136 | Val Acc: 0.3333
+[Epoch 25] Train Loss: 2.3842 | Val Loss: 3.4868 | Val Acc: 0.3333
+[Epoch 26] Train Loss: 2.3729 | Val Loss: 3.4507 | Val Acc: 0.3333
+[Epoch 27] Train Loss: 2.3597 | Val Loss: 3.4180 | Val Acc: 0.3333
+[Epoch 28] Train Loss: 2.3497 | Val Loss: 3.3817 | Val Acc: 0.3333
+[Epoch 29] Train Loss: 2.3403 | Val Loss: 3.3526 | Val Acc: 0.3333
+[Epoch 30] Train Loss: 2.3333 | Val Loss: 3.3081 | Val Acc: 0.3333
+[Done] Model saved to: /home/frank/Pu/sci_ML/Tools/case_mlp_3way_full_All_box.pth
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/Tools$ 
+
+这里是分析表格：为什么我们设计了这样的 PIBO 方法，依据就是下面这些表格。（Two-Stage optimization） 
+
+# analysis table:
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/Tools$ python /home/frank/Pu/sci_ML/kitti/Dataset_Prepare/selected_cases_60/related_analysis.py
+=== Head of Data ===
+   case_id  frame_id  tag tag_vector  Car_present  Ped_present  Cyc_present  Car_score  Ped_score  Cyc_score  tag_car  tag_ped  tag_cyc
+0        1      1014   12  [1, 2, 0]         True         True        False   0.999878   0.816887        NaN        1        2        0
+1        2      1356   12  [1, 2, 0]         True         True        False   0.999890   0.860010        NaN        1        2        0
+2        3      1366   12  [1, 2, 0]         True        False        False   0.999813        NaN        NaN        1        2        0
+3        4      1499   12  [1, 2, 0]         True         True        False   0.999559   0.656414        NaN        1        2        0
+4        5      1744   12  [1, 2, 0]         True         True        False   0.999925   0.940004        NaN        1        2        0 
+
+分析表格 1： （一定要放的表格1）
+=== Pearson Correlation: tag vs scores ===
+                tag  Car_score  Ped_score  Cyc_score
+tag        1.000000  -0.432644   0.504817        NaN
+Car_score -0.432644   1.000000  -0.347117  -0.243606
+Ped_score  0.504817  -0.347117   1.000000        NaN
+Cyc_score       NaN  -0.243606        NaN   1.000000 
+
+=== Pearson Correlation: tag_vector components vs scores ===
+                tag_car   tag_ped       tag_cyc  Car_score  Ped_score  Cyc_score
+tag_car    1.000000e+00 -0.500000 -1.634518e-16  -0.432644   0.504817        NaN
+tag_ped   -5.000000e-01  1.000000 -8.660254e-01   0.002840  -0.302219        NaN
+tag_cyc   -1.634518e-16 -0.866025  1.000000e+00   0.218953  -0.329560        NaN
+Car_score -4.326441e-01  0.002840  2.189533e-01   1.000000  -0.347117  -0.243606
+Ped_score  5.048168e-01 -0.302219 -3.295600e-01  -0.347117   1.000000        NaN
+Cyc_score           NaN       NaN           NaN  -0.243606        NaN   1.000000 
+
+=== Mean scores grouped by tag ===
+     Car_score  Ped_score  Cyc_score
+tag                                 
+12    0.996032   0.803625        NaN
+13    0.999226   0.661007   0.953409
+14    0.793601   0.906683        NaN 
+
+=== Mean Car_score grouped by tag_car (Car expert id) ===
+         Car_score
+tag_car           
+1         0.996032
+2         0.999226
+3         0.793601 
+
+=== Mean Ped_score grouped by tag_ped (Ped expert id) ===
+         Ped_score
+tag_ped           
+0         0.661007
+1         0.906683
+2         0.803625 
+
+=== Mean Cyc_score grouped by tag_cyc (Cyc expert id) ===
+         Cyc_score
+tag_cyc           
+0              NaN
+2         0.953409 
+
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/Tools$ 

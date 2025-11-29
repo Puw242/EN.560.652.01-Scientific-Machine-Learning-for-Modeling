@@ -1,0 +1,58 @@
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/kitti$ python /home/frank/Pu/sci_ML/kitti/KITTI_sub_dataset.py
+[Info] Car: rows before=70029, after_filter=20021, file=BEST_SELECTION_Car.jsonl
+[Info] Pedestrian: rows before=23497, after_filter=1725, file=BEST_SELECTION_Pedestrian.jsonl
+[Info] Cyclist: rows before=69921, after_filter=1254, file=BEST_SELECTION_Cyclist.jsonl
+[Info] Total frames (union): 3769
+[Info] Unique combos: 92
+[Check] Sum of combo counts == total frames?  OK
+
+Top 20 combos:
+ 1. Car=parta2, Pedestrian=none, Cyclist=none  |  count=1594
+ 2. Car=none, Pedestrian=none, Cyclist=none  |  count=359
+ 3. Car=none, Pedestrian=parta2, Cyclist=none  |  count=277
+ 4. Car=pointrcnn, Pedestrian=none, Cyclist=none  |  count=228
+ 5. Car=voxelrcnn, Pedestrian=none, Cyclist=none  |  count=209
+ 6. Car=pointrcnn_iou, Pedestrian=none, Cyclist=none  |  count=185
+ 7. Car=ted, Pedestrian=none, Cyclist=none  |  count=154
+ 8. Car=pv_rcnn, Pedestrian=none, Cyclist=none  |  count=123
+ 9. Car=parta2, Pedestrian=none, Cyclist=pointrcnn  |  count=106
+10. Car=parta2, Pedestrian=parta2, Cyclist=none  |  count=94
+11. Car=none, Pedestrian=pointrcnn, Cyclist=none  |  count=32
+12. Car=parta2, Pedestrian=pointrcnn, Cyclist=none  |  count=25
+13. Car=pointrcnn, Pedestrian=none, Cyclist=pointrcnn  |  count=22
+14. Car=ted, Pedestrian=parta2, Cyclist=none  |  count=21
+15. Car=parta2, Pedestrian=pointrcnn_iou, Cyclist=none  |  count=18
+16. Car=parta2, Pedestrian=none, Cyclist=pv_rcnn  |  count=17
+17. Car=none, Pedestrian=pointrcnn_iou, Cyclist=none  |  count=16
+18. Car=parta2, Pedestrian=none, Cyclist=pointrcnn_iou  |  count=16
+19. Car=none, Pedestrian=none, Cyclist=pointrcnn  |  count=15
+20. Car=pointrcnn, Pedestrian=parta2, Cyclist=none  |  count=14
+
+[Done] Per-frame combos  -> /home/frank/Pu/sci_ML/kitti/kitti_triplet_combos_per_frame.csv
+[Done] Combo counts      -> /home/frank/Pu/sci_ML/kitti/kitti_triplet_combo_counts.csv
+
+(openpcdet) frank@Frank-3080:~/Pu/sci_ML/kitti$ python /home/frank/Pu/sci_ML/kitti/KITTI_sub_dataset_file_2_combine.py
+[Info] Car: rows before=70029, after_filter=20021, file=BEST_SELECTION_Car.jsonl
+[Info] Pedestrian: rows before=23497, after_filter=1725, file=BEST_SELECTION_Pedestrian.jsonl
+[Info] Cyclist: rows before=69921, after_filter=1254, file=BEST_SELECTION_Cyclist.jsonl
+[Info] Total frames (union): 3769
+[Info] Matched frames total: 68
+
+### Linshen's Selected dataset###
+Counts by category (12/13/14):
+  tag=12  count=25
+  tag=13  count=22
+  tag=14  count=21
+
+[Examples] tag 12  (show 20/25):
+1014, 1356, 1366, 1499, 1744, 202, 2122, 2181, 2275, 2316, 2433, 2656, 2695, 2830, 2839, 2913, 2928, 2983, 3211, 3273
+
+[Examples] tag 13  (show 20/22):
+1105, 122, 123, 1513, 1522, 1704, 1878, 2149, 2179, 2266, 2369, 2512, 2574, 294, 3125, 3448, 3654, 522, 609, 647
+
+[Examples] tag 14  (show 20/21):
+1234, 1344, 1562, 1587, 1664, 1889, 2015, 2136, 216, 2171, 2523, 2554, 2742, 299, 3200, 3386, 3406, 3475, 3663, 595
+
+[Done] Per-frame detail  -> /home/frank/Pu/sci_ML/kitti/kitti_triplet_combos_per_frame.csv
+[Done] Matched frames    -> /home/frank/Pu/sci_ML/kitti/kitti_frames_matched_12_13_14.csv
+[Done] Matched counts    -> /home/frank/Pu/sci_ML/kitti/kitti_combo_12_13_14_counts.csv
