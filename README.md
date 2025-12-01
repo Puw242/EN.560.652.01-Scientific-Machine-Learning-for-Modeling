@@ -64,10 +64,10 @@ GPU training is supported but optional—set `DEVICE = "cpu"` inside the scripts
 
 ## Result Highlights
 
-![KITTI Training Loss (30 epochs)](Tools_KITTI/kitti_loss_curve_30epoch.png)
+![KITTI Training Loss (30 epochs)](Tools_KITTI/kitti_val_loss_curves.png)
 ![KITTI Validation Accuracy](Tools_KITTI/kitti_val_acc_curves.png)
-![nuScenes Loss Curves (first 30 rounds)](Tools_nuscenes/loss_curves_first30.png)
-![nuScenes Validation Accuracy](Tools_nuscenes/acc_curves_first30.png)
+![nuScenes Loss Curves (first 30 rounds)](Tools_nuscenes/draw_figure/val_loss_curves_first30.png)
+![nuScenes Validation Accuracy](Tools_nuscenes/draw_figure/val_acc_comparison.png)
 
 - The KITTI MLP converges quickly and keeps validation accuracy above 0.88 on the PIBO-weighted model (`case_mlp_3way_pibo_88_94.pth`).
 - nuScenes two-stage XGBoost reaches ~0.92 top-1 accuracy within 30 boosting rounds when the PIBO warm-up is enabled, outperforming single-stage baselines.
